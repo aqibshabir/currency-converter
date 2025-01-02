@@ -1,4 +1,5 @@
 import Currency from './components/Currency';
+import { HiOutlineSwitchHorizontal } from 'react-icons/hi';
 
 function App() {
   return (
@@ -9,10 +10,12 @@ function App() {
           <h2 className="text-2xl text-green-400">convert from one currency to another</h2>
         </div>
         <div className="bg-white p-12 rounded-2xl">
-          <div className="flex justify-evenly">
-            <Currency />
-            <button>switch</button>
-            <Currency />
+          <div className="flex justify-evenly items-center">
+            <Currency label={'Amount'} country={'uk'} currencyValue={'GBP'} />
+            <button className="mt-4">
+              <HiOutlineSwitchHorizontal size={30} />
+            </button>
+            <Currency label={'Converted to'} country={'us'} currencyValue={'USD'} />
           </div>
         </div>
       </div>
