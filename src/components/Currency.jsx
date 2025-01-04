@@ -14,6 +14,8 @@ function Currency({ label, country, currencyValue, dialog, setDialog, handleCurr
     return value.match(regex)[0];
   };
 
+  const id = label.split(' ')[0].toLowerCase();
+
   return (
     <>
       <div className="flex flex-col">
@@ -25,17 +27,19 @@ function Currency({ label, country, currencyValue, dialog, setDialog, handleCurr
             onChange={checkValue}
             className="rounded-md p-4 w-full font-semibold text-lg sm:text-xl"
           />
-          <button className="rounded-md p-4" onClick={handleCurrencyClick}>
-            <span className="flex items-center justify-between">
-              <span className="mr-2">
-                <CircleFlag countryCode={country} className="max-w-8" />
+          <fieldset>
+            <button id={id} className="rounded-md p-4" onClick={() => handleCurrencyClick(id)}>
+              <span className="flex items-center justify-between">
+                <span className="mr-2">
+                  <CircleFlag countryCode={country} className="max-w-8" />
+                </span>
+                <span className="font-semibold mr-2 text-lg">{currencyValue}</span>
+                <span>
+                  <FaAngleDown />
+                </span>
               </span>
-              <span className="font-semibold mr-2 text-lg">{currencyValue}</span>
-              <span>
-                <FaAngleDown />
-              </span>
-            </span>
-          </button>
+            </button>
+          </fieldset>
         </div>
       </div>
     </>

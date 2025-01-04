@@ -8,10 +8,22 @@ import { CircleFlag } from 'react-circle-flags';
 
 function App() {
   const [dialog, setDialog] = useState(false);
+  const [countries, setCountries] = useState(currencies);
+
+  const [input, setInput] = useState('');
 
   const handleCurrencyClick = () => {
     setDialog(!dialog);
+    setInput('');
   };
+
+  const handleCurrencySearch = (value) => {
+    setInput(value);
+  };
+
+  const filteredCountries = countries.filter((country) =>
+    country.codeName.toLowerCase().includes(input.toLowerCase())
+  );
 
   return (
     <>
@@ -26,18 +38,28 @@ function App() {
                 <RxCross2 size={18} className="" />
               </button>
             </div>
-            <div className="border border-black m-4 h-10 rounded-lg flex justify-start items-center mb-8">
+            <div className="border focus-within:border-[3px] border-black m-4 h-10 rounded-lg flex justify-start items-center mb-2">
               <span>
                 <IoIosSearch size={25} className="ml-2" />
               </span>
-              <input type="text" className="rounded-lg pl-2" placeholder="Search..." />
+              <input
+                autoFocus={true}
+                type="text"
+                className="rounded-lg pl-2 w-full"
+                placeholder="Search..."
+                value={input}
+                onChange={(e) => handleCurrencySearch(e.target.value)}
+              />
             </div>
             <div>
-              <ul name="" id="" className="overflow-y-auto h-[34rem] sm:h-[8rem] mx-2">
-                {currencies.map((country) => (
+              <ul name="" id="" className="overflow-y-auto h-[34rem] sm:h-[8rem] mx-2 mt-4">
+                {filteredCountries.map((country) => (
                   <li
                     key={country.codeName}
                     className="flex items-center border border-white rounded-xl hover:border-black/70 p-3"
+                    onClick={() => {
+                      console.log(`change country to ${country.codeName}`);
+                    }}
                   >
                     <CircleFlag
                       countryCode={country.codeName.toLowerCase()}
@@ -66,7 +88,8 @@ function App() {
                   handleCurrencyClick={handleCurrencyClick}
                 />
                 <button className="mt-4">
-                  <HiOutlineSwitchVertical size={30} className="m-4" />
+                  <HiOutlineSwitchVertical size={30} className="m-4 sm:hidden" />
+                  <HiOutlineSwitchHorizontal size={30} className="m-4 hidden sm:block" />
                 </button>
                 <Currency
                   label={'Converted to'}
@@ -81,7 +104,7 @@ function App() {
           </div>
         </>
       ) : (
-        <div className="bg-[#163300] p-4 pb-24 sm:p-20">
+        <div className="bg-[#163300] p-4 pb-24 sm:p-4 md:p-8 lg:p-20">
           <div className="mb-4">
             <h1 className="text-center text-4xl lg:text-6xl font-black text-[#9fe870] my-8">
               CURRENCY CONVERTER
@@ -97,8 +120,9 @@ function App() {
                 setDialog={setDialog}
                 handleCurrencyClick={handleCurrencyClick}
               />
-              <button className="mt-4">
-                <HiOutlineSwitchVertical size={30} className="m-4" />
+              <button className="mt-4 sn:mt-0">
+                <HiOutlineSwitchVertical size={30} className="m-4 sm:hidden" />
+                <HiOutlineSwitchHorizontal size={30} className="m-8 hidden sm:block" />
               </button>
               <Currency
                 label={'Converted to'}
