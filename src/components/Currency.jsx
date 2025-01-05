@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CircleFlag } from 'react-circle-flags';
 import { FaAngleDown } from 'react-icons/fa';
 
-function Currency({ label, country, currencyValue, handleCurrencyClick }) {
+function Currency({ label, codeName, cc, handleCurrencyClick }) {
   const [currentValue, setCurrentValue] = useState('');
 
   const id = label.split(' ')[0].toLowerCase();
@@ -28,12 +28,19 @@ function Currency({ label, country, currencyValue, handleCurrencyClick }) {
             className="rounded-md p-4 w-full font-semibold text-lg sm:text-xl"
           />
           <fieldset>
-            <button id={id} className="rounded-md p-4" onClick={() => handleCurrencyClick(id)}>
+            <button
+              id={id}
+              className="rounded-md p-4"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCurrencyClick(id);
+              }}
+            >
               <span className="flex items-center justify-between">
                 <span className="mr-2">
-                  <CircleFlag countryCode={country} className="max-w-8" />
+                  <CircleFlag countryCode={codeName} className="max-w-8" />
                 </span>
-                <span className="font-semibold mr-2 text-lg">{currencyValue}</span>
+                <span className="font-semibold mr-2 text-lg">{cc}</span>
                 <span>
                   <FaAngleDown />
                 </span>

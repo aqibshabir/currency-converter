@@ -4,12 +4,15 @@ import { currencies } from './controllers/currencies';
 import { HiOutlineSwitchHorizontal, HiOutlineSwitchVertical } from 'react-icons/hi';
 import { RxCross2 } from 'react-icons/rx';
 import { IoIosSearch } from 'react-icons/io';
+import { TiTick } from 'react-icons/ti';
 import { CircleFlag } from 'react-circle-flags';
 
 function App() {
   const [dialogOne, setDialogOne] = useState(false);
   const [dialogTwo, setDialogTwo] = useState(false);
   const [countries, setCountries] = useState(currencies);
+  const [countryOne, setCountryOne] = useState({ codeName: 'uk', cc: 'GBP' });
+  const [countryTwo, setCountryTwo] = useState({ codeName: 'us', cc: 'USD' });
 
   const [input, setInput] = useState('');
 
@@ -27,6 +30,21 @@ function App() {
 
   const handleCurrencySearch = (value) => {
     setInput(value);
+  };
+
+  const handleCurrencyChange = (dialogId, codeName, cc) => {
+    if (dialogId === 'amount') {
+      setCountryOne({ codeName, cc });
+      setDialogOne(false);
+    } else if (dialogId === 'converted') {
+      setCountryTwo({ codeName, cc });
+      setDialogTwo(false);
+    }
+  };
+
+  const handleSwitchingCountries = (countryOne, countryTwo) => {
+    setCountryOne(countryTwo);
+    setCountryTwo(countryOne);
   };
 
   const filteredCountries = countries.filter((country) =>
@@ -68,16 +86,26 @@ function App() {
                 {filteredCountries.map((country) => (
                   <li
                     key={country.codeName}
-                    className="flex items-center border border-white rounded-xl hover:border-black/70 p-3"
+                    className="flex items-center justify-between border border-white rounded-xl hover:border-black/70 p-3"
                     onClick={() => {
-                      console.log(`change country to ${country.codeName}`);
+                      if (country.cc === countryOne.cc) {
+                        return;
+                      }
+                      handleCurrencyChange('amount', country.codeName.toLowerCase(), country.cc);
                     }}
                   >
-                    <CircleFlag
-                      countryCode={country.codeName.toLowerCase()}
-                      className="max-w-6 ml-4 mr-3"
-                    />
-                    <span className="tracking-wide font-light">{country.cc}</span>
+                    <span className="flex">
+                      <CircleFlag
+                        countryCode={country.codeName.toLowerCase()}
+                        className="max-w-6 ml-4 mr-3"
+                      />
+                      <span className="tracking-wide font-light">{country.cc}</span>
+                    </span>
+                    {country.cc === countryOne.cc && (
+                      <span className="">
+                        <TiTick size={22} />
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -118,16 +146,26 @@ function App() {
                 {filteredCountries.map((country) => (
                   <li
                     key={country.codeName}
-                    className="flex items-center border border-white rounded-xl hover:border-black/70 p-3"
+                    className="flex items-center justify-between border border-white rounded-xl hover:border-black/70 p-3"
                     onClick={() => {
-                      console.log(`change country to ${country.codeName}`);
+                      if (country.cc === countryTwo.cc) {
+                        return;
+                      }
+                      handleCurrencyChange('converted', country.codeName.toLowerCase(), country.cc);
                     }}
                   >
-                    <CircleFlag
-                      countryCode={country.codeName.toLowerCase()}
-                      className="max-w-6 ml-4 mr-3"
-                    />
-                    <span className="tracking-wide font-light">{country.cc}</span>
+                    <span className="flex">
+                      <CircleFlag
+                        countryCode={country.codeName.toLowerCase()}
+                        className="max-w-6 ml-4 mr-3"
+                      />
+                      <span className="tracking-wide font-light">{country.cc}</span>
+                    </span>
+                    {country.cc === countryOne.cc && (
+                      <span className="">
+                        <TiTick size={22} />
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -135,7 +173,14 @@ function App() {
           </div>
         </>
       )}
-      <div className="bg-[#163300] p-4 pb-24 sm:p-4 md:p-8 lg:p-20">
+      <div
+        className="bg-[#163300] p-4 pb-24 sm:p-4 md:p-8 lg:p-20"
+        onClick={() => {
+          setDialogOne(false);
+          setDialogTwo(false);
+          setInput('');
+        }}
+      >
         <div className="mb-4">
           <h1 className="text-center text-4xl lg:text-6xl font-black text-[#9fe870] my-8">
             CURRENCY CONVERTER
@@ -145,18 +190,26 @@ function App() {
           <div className="flex flex-col items-center sm:flex sm:flex-row sm:justify-evenly sm:items-center">
             <Currency
               label={'Amount'}
-              country={'uk'}
-              currencyValue={'GBP'}
+              codeName={countryOne.codeName}
+              cc={countryOne.cc}
               handleCurrencyClick={handleCurrencyClick}
             />
             <button className="mt-4 sn:mt-0">
-              <HiOutlineSwitchVertical size={30} className="m-4 sm:hidden" />
-              <HiOutlineSwitchHorizontal size={30} className="m-8 hidden sm:block" />
+              <HiOutlineSwitchVertical
+                size={30}
+                className="m-4 sm:hidden"
+                onClick={() => handleSwitchingCountries(countryOne, countryTwo)}
+              />
+              <HiOutlineSwitchHorizontal
+                size={30}
+                className="m-8 hidden sm:block"
+                onClick={() => handleSwitchingCountries(countryOne, countryTwo)}
+              />
             </button>
             <Currency
               label={'Converted to'}
-              country={'us'}
-              currencyValue={'USD'}
+              codeName={countryTwo.codeName}
+              cc={countryTwo.cc}
               handleCurrencyClick={handleCurrencyClick}
             />
           </div>
