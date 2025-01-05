@@ -139,8 +139,6 @@ function App() {
               label={'Amount'}
               country={'uk'}
               currencyValue={'GBP'}
-              dialog={dialogOne}
-              setDialog={setDialogOne}
               handleCurrencyClick={handleCurrencyClick}
             />
             <button className="mt-4 sn:mt-0">
@@ -151,8 +149,6 @@ function App() {
               label={'Converted to'}
               country={'us'}
               currencyValue={'USD'}
-              dialog={dialogTwo}
-              setDialog={setDialogTwo}
               handleCurrencyClick={handleCurrencyClick}
             />
           </div>

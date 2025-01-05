@@ -3,7 +3,7 @@ const jsonData = `[
   {"cc":"AFN","symbol":"Afs","name":"Afghan afghani","codeName":"AF"},
   {"cc":"ALL","symbol":"L","name":"Albanian lek","codeName":"AL"},
   {"cc":"AMD","symbol":"AMD","name":"Armenian dram","codeName":"AM"},
-  {"cc":"ANG","symbol":"NAƒ","name":"Netherlands Antillean gulden","codeName":"AN"},
+  {"cc":"ANG","symbol":"NAƒ","name":"Netherlands Antillean gulden","codeName":"UN"},
   {"cc":"AOA","symbol":"Kz","name":"Angolan kwanza","codeName":"AO"},
   {"cc":"ARS","symbol":"$","name":"Argentine peso","codeName":"AR"},
   {"cc":"AUD","symbol":"$","name":"Australian dollar","codeName":"AU"},
@@ -150,11 +150,11 @@ const jsonData = `[
   {"cc":"XCD","symbol":"EC$","name":"East Caribbean dollar","codeName":"VN"},
   {"cc":"XDR","symbol":"SDR","name":"Special Drawing Rights","codeName":"VU"},
   {"cc":"XOF","symbol":"CFA","name":"West African CFA franc","codeName":"WS"},
-  {"cc":"XPF","symbol":"F","name":"CFP franc","codeName":"XA"},
-  {"cc":"YER","symbol":"YER","name":"Yemeni rial","codeName":"XC"},
-  {"cc":"ZAR","symbol":"R","name":"South African rand","codeName":"XO"},
-  {"cc":"ZMK","symbol":"ZK","name":"Zambian kwacha","codeName":"XP"},
-  {"cc":"ZWR","symbol":"Z$","name":"Zimbabwean dollar","codeName":"YE"}
+  {"cc":"XPF","symbol":"F","name":"CFP franc","codeName":"PF"},
+  {"cc":"YER","symbol":"YER","name":"Yemeni rial","codeName":"YE"},
+  {"cc":"ZAR","symbol":"R","name":"South African rand","codeName":"ZA"},
+  {"cc":"ZMK","symbol":"ZK","name":"Zambian kwacha","codeName":"ZM"},
+  {"cc":"ZWR","symbol":"Z$","name":"Zimbabwean dollar","codeName":"ZW"}
 ]`;
 
 export const currencies = JSON.parse(jsonData);

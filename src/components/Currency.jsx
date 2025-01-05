@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CircleFlag } from 'react-circle-flags';
 import { FaAngleDown } from 'react-icons/fa';
 
-function Currency({ label, country, currencyValue, dialog, setDialog, handleCurrencyClick }) {
+function Currency({ label, country, currencyValue, handleCurrencyClick }) {
   const [currentValue, setCurrentValue] = useState('');
 
   const id = label.split(' ')[0].toLowerCase();
