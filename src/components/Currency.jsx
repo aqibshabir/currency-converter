@@ -5,6 +5,8 @@ import { FaAngleDown } from 'react-icons/fa';
 function Currency({ label, country, currencyValue, dialog, setDialog, handleCurrencyClick }) {
   const [currentValue, setCurrentValue] = useState('');
 
+  const id = label.split(' ')[0].toLowerCase();
+
   const checkValue = (e) => {
     setCurrentValue(handleDecimalsOnValue(e.target.value));
   };
@@ -13,8 +15,6 @@ function Currency({ label, country, currencyValue, dialog, setDialog, handleCurr
     const regex = /\d*\.?\d{0,2}/;
     return value.match(regex)[0];
   };
-
-  const id = label.split(' ')[0].toLowerCase();
 
   return (
     <>
