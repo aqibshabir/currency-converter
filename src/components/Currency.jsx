@@ -1,14 +1,29 @@
-import { useState } from 'react';
 import { CircleFlag } from 'react-circle-flags';
 import { FaAngleDown } from 'react-icons/fa';
 
-function Currency({ label, codeName, cc, handleCurrencyClick }) {
-  const [currentValue, setCurrentValue] = useState('');
-
+function Currency({
+  label,
+  codeName,
+  cc,
+  handleCurrencyClick,
+  inputOne,
+  setInputOne,
+  inputTwo,
+  setInputTwo,
+  exchangeRate,
+  setExchangeRate,
+}) {
   const id = label.split(' ')[0].toLowerCase();
 
   const checkValue = (e) => {
-    setCurrentValue(handleDecimalsOnValue(e.target.value));
+    const value = handleDecimalsOnValue(e.target.value);
+    if (id === 'amount') {
+      setInputOne(value);
+      setInputTwo(Math.round(value * exchangeRate * 100) / 100);
+    } else {
+      setInputOne(value);
+      setInputTwo(Math.round((value / exchangeRate) * 100) / 100);
+    }
   };
 
   const handleDecimalsOnValue = (value) => {
@@ -23,7 +38,7 @@ function Currency({ label, codeName, cc, handleCurrencyClick }) {
         <div className="border border-black rounded-md flex">
           <input
             type="text"
-            value={currentValue}
+            value={inputOne}
             onChange={checkValue}
             className="rounded-md p-4 w-full font-semibold text-lg sm:text-xl"
           />

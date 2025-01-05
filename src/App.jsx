@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Currency from './components/Currency';
 import { currencies } from './controllers/currencies';
 import { HiOutlineSwitchHorizontal, HiOutlineSwitchVertical } from 'react-icons/hi';
@@ -10,11 +10,35 @@ import { CircleFlag } from 'react-circle-flags';
 function App() {
   const [dialogOne, setDialogOne] = useState(false);
   const [dialogTwo, setDialogTwo] = useState(false);
-  const [countries, setCountries] = useState(currencies);
+  const [countries] = useState(currencies);
   const [countryOne, setCountryOne] = useState({ codeName: 'uk', cc: 'GBP' });
   const [countryTwo, setCountryTwo] = useState({ codeName: 'us', cc: 'USD' });
-
   const [input, setInput] = useState('');
+  const [currencyOneInput, setCurrencyOneInput] = useState('');
+  const [currencyTwoInput, setCurrencyTwoInput] = useState('');
+  const [exchangeRate, setExchangeRate] = useState(0);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function fetchData() {
+      let response = await fetch(
+        `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${countryOne.cc.toLowerCase()}.json`
+      );
+      if (!response.ok) {
+        throw Error('API is down - try again!');
+      }
+      response = await response.json();
+      const data = response[countryOne.cc.toLowerCase()];
+      setCurrencyOneInput(1);
+      const dataTwo = data[countryTwo.cc.toLowerCase()];
+      setExchangeRate(Math.round(dataTwo * 100) / 100);
+      setCurrencyTwoInput(Math.round(dataTwo * 100) / 100);
+    }
+
+    fetchData();
+    return () => controller.abort();
+  }, [countryOne]);
 
   const handleCurrencyClick = (dialogId) => {
     if (dialogId === 'amount') {
@@ -91,6 +115,9 @@ function App() {
                       if (country.cc === countryOne.cc) {
                         return;
                       }
+                      if (country.cc === countryTwo.cc) {
+                        handleSwitchingCountries(countryOne, countryTwo);
+                      }
                       handleCurrencyChange('amount', country.codeName.toLowerCase(), country.cc);
                     }}
                   >
@@ -151,6 +178,9 @@ function App() {
                       if (country.cc === countryTwo.cc) {
                         return;
                       }
+                      if (country.cc === countryOne.cc) {
+                        handleSwitchingCountries(countryOne, countryTwo);
+                      }
                       handleCurrencyChange('converted', country.codeName.toLowerCase(), country.cc);
                     }}
                   >
@@ -161,7 +191,7 @@ function App() {
                       />
                       <span className="tracking-wide font-light">{country.cc}</span>
                     </span>
-                    {country.cc === countryOne.cc && (
+                    {country.cc === countryTwo.cc && (
                       <span className="">
                         <TiTick size={22} />
                       </span>
@@ -193,6 +223,12 @@ function App() {
               codeName={countryOne.codeName}
               cc={countryOne.cc}
               handleCurrencyClick={handleCurrencyClick}
+              inputOne={currencyOneInput}
+              setInputOne={setCurrencyOneInput}
+              inputTwo={currencyTwoInput}
+              setInputTwo={setCurrencyTwoInput}
+              exchangeRate={exchangeRate}
+              setExchangeRate={setExchangeRate}
             />
             <button className="mt-4 sn:mt-0">
               <HiOutlineSwitchVertical
@@ -211,6 +247,12 @@ function App() {
               codeName={countryTwo.codeName}
               cc={countryTwo.cc}
               handleCurrencyClick={handleCurrencyClick}
+              inputOne={currencyTwoInput}
+              setInputOne={setCurrencyTwoInput}
+              inputTwo={currencyOneInput}
+              setInputTwo={setCurrencyOneInput}
+              exchangeRate={exchangeRate}
+              setExchangeRate={setExchangeRate}
             />
           </div>
         </div>
