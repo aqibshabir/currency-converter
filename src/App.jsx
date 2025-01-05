@@ -37,7 +37,7 @@ function App() {
     <>
       {dialogOne && (
         <>
-          <div className="w-full h-[90%] top-[10%] sm:w-72 sm:h-72 sm:top-[45%] sm:left-[40%] bg-white absolute rounded-3xl">
+          <div className="w-full h-[90%] top-[10%] sm:w-[20rem] lg:w-[30rem] sm:h-72 lg:h-[24rem] sm:top-0 sm:right-1/2 sm:translate-y-[16rem] lg:translate-y-[22rem] sm:translate-x-[2rem] shadow-md bg-white absolute rounded-3xl">
             <div className="flex justify-end">
               <button
                 className="m-4 rounded-full hover:bg-gray-200 p-2"
@@ -60,7 +60,11 @@ function App() {
               />
             </div>
             <div>
-              <ul name="" id="" className="overflow-y-auto h-[34rem] sm:h-[8rem] mx-2 mt-4">
+              <ul
+                name=""
+                id=""
+                className="overflow-y-auto h-[34rem] sm:h-[8rem] lg:h-[14rem] mx-2 mt-4"
+              >
                 {filteredCountries.map((country) => (
                   <li
                     key={country.codeName}
@@ -83,7 +87,7 @@ function App() {
       )}
       {dialogTwo && (
         <>
-          <div className="w-full h-[90%] top-[10%] sm:w-72 sm:h-72 sm:top-[45%] sm:left-[40%] bg-white absolute rounded-3xl">
+          <div className="w-full h-[90%] top-[10%] sm:w-[20rem] lg:w-[30rem] sm:h-72 lg:h-[24rem] sm:top-0 sm:right-0 sm:translate-y-[16rem] lg:translate-y-[22rem] shadow-md bg-white absolute rounded-3xl">
             <div className="flex justify-end">
               <button
                 className="m-4 rounded-full hover:bg-gray-200 p-2"
@@ -106,7 +110,11 @@ function App() {
               />
             </div>
             <div>
-              <ul name="" id="" className="overflow-y-auto h-[34rem] sm:h-[8rem] mx-2 mt-4">
+              <ul
+                name=""
+                id=""
+                className="overflow-y-auto h-[34rem] sm:h-[8rem] lg:h-[14rem] mx-2 mt-4"
+              >
                 {filteredCountries.map((country) => (
                   <li
                     key={country.codeName}
