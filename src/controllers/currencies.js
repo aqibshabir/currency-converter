@@ -51,7 +51,7 @@ const jsonData = `[
   {"cc":"GIP","symbol":"£","name":"Gibraltar pound","codeName":"GI"},
   {"cc":"GMD","symbol":"D","name":"Gambian dalasi","codeName":"GM"},
   {"cc":"GNF","symbol":"FG","name":"Guinean franc","codeName":"GN"},
-  {"cc":"GQE","symbol":"CFA","name":"Central African CFA franc","codeName":"CF"},
+  {"cc":"GQE","symbol":"E","name":"Equatorial Guinean ekwele","codeName":"GQ"},
   {"cc":"GTQ","symbol":"Q","name":"Guatemalan quetzal","codeName":"GT"},
   {"cc":"GYD","symbol":"GY$","name":"Guyanese dollar","codeName":"GY"},
   {"cc":"HKD","symbol":"HK$","name":"Hong Kong dollar","codeName":"HK"},

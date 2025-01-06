@@ -19,16 +19,20 @@ function Currency({
     const value = handleDecimalsOnValue(e.target.value);
     if (id === 'amount') {
       setInputOne(value);
-      setInputTwo(Math.round(value * exchangeRate * 100) / 100);
+      setInputTwo(formatToTwoDecimals(value * exchangeRate));
     } else {
       setInputOne(value);
-      setInputTwo(Math.round((value / exchangeRate) * 100) / 100);
+      setInputTwo(formatToTwoDecimals(value / exchangeRate));
     }
   };
 
   const handleDecimalsOnValue = (value) => {
     const regex = /\d*\.?\d{0,2}/;
-    return value.match(regex)[0];
+    return value === '.' ? '' : value.match(regex)[0];
+  };
+
+  const formatToTwoDecimals = (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2);
   };
 
   return (

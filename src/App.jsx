@@ -17,6 +17,7 @@ function App() {
   const [currencyOneInput, setCurrencyOneInput] = useState('');
   const [currencyTwoInput, setCurrencyTwoInput] = useState('');
   const [exchangeRate, setExchangeRate] = useState(0);
+  const [currencyData, setCurrencyData] = useState({});
 
   useEffect(() => {
     const controller = new AbortController();
@@ -30,6 +31,7 @@ function App() {
       }
       response = await response.json();
       const data = response[countryOne.cc.toLowerCase()];
+      setCurrencyData(data);
       setCurrencyOneInput(1);
       const dataTwo = data[countryTwo.cc.toLowerCase()];
       setExchangeRate(Math.round(dataTwo * 100) / 100);
@@ -254,6 +256,15 @@ function App() {
               exchangeRate={exchangeRate}
               setExchangeRate={setExchangeRate}
             />
+          </div>
+          <div className="my-6 text-center text-xl font-semibold">
+            <p>
+              {`${currencyData[countryOne.cc.toLowerCase()]} ${countryOne.cc}`} ={' '}
+              <span className="text-green-700">{`${
+                currencyData[countryTwo.cc.toLowerCase()]
+              }`}</span>{' '}
+              {countryTwo.cc}
+            </p>
           </div>
         </div>
       </div>
