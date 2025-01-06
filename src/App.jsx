@@ -5,6 +5,7 @@ import { HiOutlineSwitchHorizontal, HiOutlineSwitchVertical } from 'react-icons/
 import { RxCross2 } from 'react-icons/rx';
 import { IoIosSearch } from 'react-icons/io';
 import { TiTick } from 'react-icons/ti';
+import { PiCurrencyEthFill } from 'react-icons/pi';
 import { CircleFlag } from 'react-circle-flags';
 
 function App() {
@@ -78,7 +79,10 @@ function App() {
   );
 
   return (
-    <>
+    <div className="bg-[#ecefeb]">
+      <nav className="bg-black p-2 flex items-center">
+        <PiCurrencyEthFill className="text-[#cbff7c] size-14 sm:size-12 p-1" />
+      </nav>
       {dialogOne && (
         <>
           <div className="w-full h-[90%] top-[10%] sm:w-[20rem] lg:w-[30rem] sm:h-72 lg:h-[24rem] sm:top-0 sm:right-1/2 sm:translate-y-[16rem] lg:translate-y-[22rem] sm:translate-x-[2rem] shadow-md bg-white absolute rounded-3xl">
@@ -206,7 +210,7 @@ function App() {
         </>
       )}
       <div
-        className="bg-[#163300] p-4 pb-24 sm:p-4 md:p-8 lg:p-20"
+        className="bg-[#cbff7c] p-4 pb-24 sm:p-8 lg:p-20"
         onClick={() => {
           setDialogOne(false);
           setDialogTwo(false);
@@ -214,11 +218,11 @@ function App() {
         }}
       >
         <div className="mb-4">
-          <h1 className="text-center text-4xl lg:text-6xl font-black text-[#9fe870] my-8">
+          <h1 className="text-center text-4xl sm:text-5xl lg:text-6xl font-black text-black my-16 sm:my-8">
             CURRENCY CONVERTER
           </h1>
         </div>
-        <div className="bg-white p-4 rounded-2xl">
+        <div className="bg-white shadow-xl p-4 rounded-2xl">
           <div className="flex flex-col items-center sm:flex sm:flex-row sm:justify-evenly sm:items-center">
             <Currency
               label={'Amount'}
@@ -265,10 +269,21 @@ function App() {
               }`}</span>{' '}
               {countryTwo.cc}
             </p>
+            <p className="text-sm text-black/70 font-light">
+              Exchange rate at{' '}
+              {new Date().toLocaleTimeString('en-GB', {
+                hour: 'numeric',
+                minute: 'numeric',
+              })}
+            </p>
           </div>
         </div>
       </div>
-    </>
+      <div className="pb-4">
+        <h2 className="text-center text-4xl mt-8">TOP CURRENCIES TODAY</h2>
+        <div className="h-80 bg-white rounded-xl m-8"></div>
+      </div>
+    </div>
   );
 }
 
