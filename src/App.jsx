@@ -83,7 +83,7 @@ function App() {
   };
 
   const filteredCountries = countries.filter((country) =>
-    country.codeName.toLowerCase().includes(input.toLowerCase())
+    country.cc.toLowerCase().includes(input.toLowerCase())
   );
 
   return (
