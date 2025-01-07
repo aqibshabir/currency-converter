@@ -21,6 +21,14 @@ function App() {
   const [currencyData, setCurrencyData] = useState({});
 
   useEffect(() => {
+    if (dialogOne || dialogTwo) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+  }, [dialogOne, dialogTwo]);
+
+  useEffect(() => {
     const controller = new AbortController();
 
     async function fetchData() {
