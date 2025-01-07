@@ -39,7 +39,7 @@ function Currency({
     <>
       <div className="flex flex-col">
         <p className="text-gray-500 text-sm mb-2 font-light">{label}</p>
-        <div className="border border-black rounded-md flex">
+        <div className="outline outline-1 outline-gray-300 rounded-md flex group hover:outline-2  hover:outline-gray-500 focus-within:hover:outline-[3px] focus-within:hover:outline-black focus-within:outline-[3px] focus-within:outline-black ease-in-out duration-300">
           <input
             type="text"
             value={inputOne}

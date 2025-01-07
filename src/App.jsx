@@ -79,13 +79,25 @@ function App() {
   );
 
   return (
-    <div className="bg-[#ecefeb]">
+    <div
+      className="bg-[#ecefeb]"
+      onClick={() => {
+        setDialogOne(false);
+        setDialogTwo(false);
+        setInput('');
+      }}
+    >
       <nav className="bg-black p-2 flex items-center">
         <PiCurrencyEthFill className="text-[#cbff7c] size-14 sm:size-12 p-1" />
       </nav>
       {dialogOne && (
         <>
-          <div className="w-full h-[90%] top-[10%] sm:w-[20rem] lg:w-[30rem] sm:h-72 lg:h-[24rem] sm:top-0 sm:right-1/2 sm:translate-y-[16rem] lg:translate-y-[22rem] sm:translate-x-[2rem] shadow-md bg-white absolute rounded-3xl">
+          <div
+            className="w-full h-[90%] top-[10%] sm:w-[20rem] lg:w-[30rem] sm:h-72 lg:h-[24rem] sm:top-0 sm:right-1/2 sm:translate-y-[20.5rem] lg:translate-y-[24.25rem] sm:translate-x-[2rem] shadow-md bg-white absolute rounded-3xl"
+            onClick={(e) => {
+              e.stopPropagation(e);
+            }}
+          >
             <div className="flex justify-end">
               <button
                 className="m-4 rounded-full hover:bg-gray-200 p-2"
@@ -148,7 +160,12 @@ function App() {
       )}
       {dialogTwo && (
         <>
-          <div className="w-full h-[90%] top-[10%] sm:w-[20rem] lg:w-[30rem] sm:h-72 lg:h-[24rem] sm:top-0 sm:right-0 sm:translate-y-[16rem] lg:translate-y-[22rem] shadow-md bg-white absolute rounded-3xl">
+          <div
+            className="w-full h-[90%] top-[10%] sm:w-[20rem] lg:w-[30rem] sm:h-72 lg:h-[24rem] sm:top-0 sm:right-0 sm:translate-y-[20.5rem] lg:translate-y-[24.25rem] shadow-md bg-white absolute rounded-3xl"
+            onClick={(e) => {
+              e.stopPropagation(e);
+            }}
+          >
             <div className="flex justify-end">
               <button
                 className="m-4 rounded-full hover:bg-gray-200 p-2"
@@ -209,14 +226,7 @@ function App() {
           </div>
         </>
       )}
-      <div
-        className="bg-[#cbff7c] p-4 pb-24 sm:p-8 lg:p-20"
-        onClick={() => {
-          setDialogOne(false);
-          setDialogTwo(false);
-          setInput('');
-        }}
-      >
+      <div className="bg-[#cbff7c] p-4 pb-24 sm:p-8 lg:p-20">
         <div className="mb-4">
           <h1 className="text-center text-4xl sm:text-5xl lg:text-6xl font-black text-black my-16 sm:my-8">
             CURRENCY CONVERTER
@@ -264,9 +274,9 @@ function App() {
           <div className="my-6 text-center text-xl font-semibold">
             <p>
               {`${currencyData[countryOne.cc.toLowerCase()]} ${countryOne.cc}`} ={' '}
-              <span className="text-green-700">{`${
-                currencyData[countryTwo.cc.toLowerCase()]
-              }`}</span>{' '}
+              <span className="text-green-700">{`${(
+                Math.round(currencyData[countryTwo.cc.toLowerCase()] * 1000) / 1000
+              ).toFixed(3)}`}</span>{' '}
               {countryTwo.cc}
             </p>
             <p className="text-sm text-black/70 font-light">
