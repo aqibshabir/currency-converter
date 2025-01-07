@@ -23,6 +23,9 @@ function App() {
   useEffect(() => {
     if (dialogOne || dialogTwo) {
       document.body.classList.add('overflow-hidden');
+      if (window.innerWidth < 640) {
+        window.scrollTo(0, 0);
+      }
     } else {
       document.body.classList.remove('overflow-hidden');
     }
@@ -86,6 +89,10 @@ function App() {
     country.cc.toLowerCase().includes(input.toLowerCase())
   );
 
+  const roundedCurrency = (
+    Math.round(currencyData[countryTwo.cc.toLowerCase()] * 1000) / 1000
+  ).toFixed(3);
+
   return (
     <div
       className="bg-[#ecefeb]"
@@ -101,7 +108,7 @@ function App() {
       {dialogOne && (
         <>
           <div
-            className="w-full h-[90%] top-[10%] sm:w-[20rem] lg:w-[30rem] sm:h-72 lg:h-[24rem] sm:top-0 sm:right-1/2 sm:translate-y-[20.5rem] lg:translate-y-[24.25rem] sm:translate-x-[2rem] shadow-md bg-white absolute rounded-3xl"
+            className="w-full h-[90%] top-[10%] sm:w-[20rem] lg:w-[30rem] sm:h-72 lg:h-[24rem] sm:top-0 sm:right-[45%] sm:translate-y-[20.5rem] lg:translate-y-[24.25rem] shadow-md bg-white absolute rounded-3xl"
             onClick={(e) => {
               e.stopPropagation(e);
             }}
@@ -282,10 +289,7 @@ function App() {
           <div className="my-6 text-center text-xl font-semibold">
             <p>
               {`${currencyData[countryOne.cc.toLowerCase()]} ${countryOne.cc}`} ={' '}
-              <span className="text-green-700">{`${(
-                Math.round(currencyData[countryTwo.cc.toLowerCase()] * 1000) / 1000
-              ).toFixed(3)}`}</span>{' '}
-              {countryTwo.cc}
+              <span className="text-green-700">{`${roundedCurrency}`}</span> {countryTwo.cc}
             </p>
             <p className="text-sm text-black/70 font-light">
               Exchange rate at{' '}

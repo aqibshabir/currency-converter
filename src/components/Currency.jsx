@@ -8,10 +8,8 @@ function Currency({
   handleCurrencyClick,
   inputOne,
   setInputOne,
-  inputTwo,
   setInputTwo,
   exchangeRate,
-  setExchangeRate,
 }) {
   const id = label.split(' ')[0].toLowerCase();
 
